@@ -1,6 +1,9 @@
 """Сборник строк и прочих постоянных значений.
 """
 # to datetime.isoformat
+from gc import get_referents
+
+
 TIMESPEC = 'seconds'
 
 # for core.users
@@ -18,6 +21,9 @@ DELETE_CHARITY_PROJECTS = 'Удалить благотворительный п�
 GET_ALL_DONATIONS = 'Просмотреть все пожеотвования'
 CREATE_DONATION = 'Добавить пожертвование'
 GET_MY_DONATIONS = 'Просмотреть все мои пожертвования'
+
+# names for endpoints in api.google
+GET_REPORT_TO_GOOGLE = 'Добавить данные из БД в Google-таблицу'
 
 # error messages
 ERR_LEN_PASSWORD = 'Password should be at least 3 characters'

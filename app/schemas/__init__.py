@@ -6,6 +6,9 @@ from .charity_project import (  # noqa
     CharityProjectResponse,
     CharityProjectUpdate
 )
+from .google_api import(        # noqa
+    GoogleAPIResponseSchema
+)
 from .donation import (         # noqa
     DonationCreate,
     DonationLongResponse,

@@ -114,3 +114,7 @@ def normalize_datetime(values: dict) -> dict:
                 timespec=const.TIMESPEC
             )
     return values
+
+
+def sort_by_timdelta(obj):
+    return obj.close_date - obj.create_date
