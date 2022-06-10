@@ -116,7 +116,7 @@ def normalize_datetime(values: dict) -> dict:
     return values
 
 
-def sort_by_timdelta(obj):
+def sort_by_timedelta(obj):
     """Ключ для сортировки по разнице дат.
     """
     return obj.close_date - obj.create_date
