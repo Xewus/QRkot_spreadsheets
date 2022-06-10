@@ -28,6 +28,7 @@ async def get_report(
 ) -> Dict[str, str]:
     """Отпраляет отчёт по скорости закрытия проектов в `googlesheets`.
 
+    Только для суперюзеров.
     ### Args:
     - session (db.AsyncSession, optional):
         Объект сессии с БД.
@@ -46,7 +47,7 @@ async def get_report(
         session=session,
         one_obj=False
     )
-    closed_projects.sort(key=utils.sort_by_timdelta)
+    closed_projects.sort(key=utils.sort_by_timedelta)
 
     spreadsheet_id = await go_service.get_exist_id(
         wrapper_service=wrapper_service
