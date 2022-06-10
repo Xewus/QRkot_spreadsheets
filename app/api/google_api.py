@@ -46,7 +46,7 @@ async def get_report(
         session=session,
         one_obj=False
     )
-    closed_projects.sort(key=utils.sort_by_timdelta)
+    closed_projects.sort(key=utils.sort_by_timedelta)
 
     spreadsheet_id = await go_service.get_exist_id(
         wrapper_service=wrapper_service
