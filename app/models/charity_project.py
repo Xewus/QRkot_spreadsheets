@@ -6,7 +6,7 @@ from app.core import db
 from app.models.base import GenericFields
 
 
-class CharityProject(db.Base,  GenericFields):
+class CharityProject(db.Base, GenericFields):
     """Таблица для благотворительных проектов `charityproject`.
 
     ### Attrs:

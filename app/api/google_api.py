@@ -41,10 +41,10 @@ async def get_report(
         Ссылка на таблицу с данными.
     """
     closed_projects = await chr_crud.get_by_field(
-            required_field='fully_invested',
-            value=True,
-            session=session,
-            one_obj=False
+        required_field='fully_invested',
+        value=True,
+        session=session,
+        one_obj=False
     )
     closed_projects.sort(key=utils.sort_by_timdelta)
 

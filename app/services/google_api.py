@@ -92,7 +92,7 @@ async def get_exist_id(wrapper_service: Aiogoogle) -> Union[None, str]:
     response = await wrapper_service.as_service_account(
         service.files.list(
             q='mimeType="application/vnd.google-apps.spreadsheet"'
-            )
+        )
     )
     table = response['files']
     if len(table) > 0:
