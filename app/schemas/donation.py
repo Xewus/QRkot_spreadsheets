@@ -3,15 +3,8 @@
 from datetime import datetime
 from typing import Union
 
-from pydantic import (
-    UUID4,
-    BaseModel,
-    Extra,
-    Field,
-    NonNegativeInt,
-    PositiveInt,
-    root_validator
-)
+from pydantic import (UUID4, BaseModel, Extra, Field, NonNegativeInt,
+                      PositiveInt, root_validator)
 
 from app.services import utils
 

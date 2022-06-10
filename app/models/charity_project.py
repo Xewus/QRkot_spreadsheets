@@ -32,11 +32,10 @@ class CharityProject(db.Base,  GenericFields):
     """
 
     __table_args__ = (
-        GenericFields.__table_args__ +
-        (sa.CheckConstraint(
+        GenericFields.__table_args__ + (sa.CheckConstraint(
             'length(name) BETWEEN 1 AND 100',
             name='invalid length of name'
-        ), )
+        ),)
     )
 
     name = sa.Column(

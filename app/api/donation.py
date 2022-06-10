@@ -29,7 +29,7 @@ async def get_all_donations(
 
     ### Args:
     - session (db.AsyncSession, optional):
-        - Объект сессии с БД.
+        Объект сессии с БД.
         Defaults to Depends(db.get_async_session).
 
     ### Returns:

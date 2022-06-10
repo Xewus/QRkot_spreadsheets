@@ -1,10 +1,9 @@
 """Сборник базовых операций CRUD.
 """
-from datetime import datetime
 from typing import Any, Generic, List, Type, TypeVar, Union
 
 from fastapi.encoders import jsonable_encoder
-from sqlalchemy import select, asc
+from sqlalchemy import asc, select
 
 from app import schemas
 from app.core import db

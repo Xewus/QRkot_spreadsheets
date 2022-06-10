@@ -2,12 +2,7 @@
 """
 from fastapi import APIRouter
 
-from app.api import (
-    charity_project,
-    google_api,
-    donation,
-    user
-)
+from app.api import charity_project, donation, google_api, user
 
 main_router = APIRouter()
 

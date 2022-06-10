@@ -2,8 +2,7 @@
 """
 from http import HTTPStatus
 
-
-from sqlalchemy.exc import IntegrityError        # noqa
+from sqlalchemy.exc import IntegrityError  # noqa
 from starlette.exceptions import HTTPException
 
 

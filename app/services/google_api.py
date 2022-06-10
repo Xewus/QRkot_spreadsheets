@@ -5,9 +5,8 @@ from typing import List, Union
 from aiogoogle import Aiogoogle
 
 from app.core.config import settings
-from app.services import constants as const
 from app.models import CharityProject
-from datetime import timedelta
+from app.services import constants as const
 
 
 async def spreadsheet_create(wrapper_service: Aiogoogle) -> str:
@@ -96,11 +95,11 @@ async def get_exist_id(wrapper_service: Aiogoogle) -> Union[None, str]:
             )
     )
     table = response['files']
-    if len(table) == 0:
-        return None
-    for sheet in table:
-        if sheet['name'] == const.TABLE_NAME:
-            return sheet['id']
+    if len(table) > 0:
+        for sheet in table:
+            if sheet['name'] == const.TABLE_NAME:
+                return sheet['id']
+    return None
 
 
 async def spreadsheet_update_value(

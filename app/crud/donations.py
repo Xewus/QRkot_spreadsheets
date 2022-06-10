@@ -1,10 +1,10 @@
 """Операции CRUD для модели `Donation`.
 """
-from typing import Any, List, Union
+from typing import List
 
 from pydantic import UUID4
 
-from app import models, schemas
+from app import models
 from app.core import db
 from app.crud.base import CRUDBase
 

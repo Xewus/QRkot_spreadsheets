@@ -3,8 +3,8 @@
 from datetime import datetime
 
 from app.core import db
-from app.services import exceptions as exc
 from app.services import constants as const
+from app.services import exceptions as exc
 
 
 async def try_commit_to_db(
@@ -117,4 +117,6 @@ def normalize_datetime(values: dict) -> dict:
 
 
 def sort_by_timdelta(obj):
+    """Ключ для сортировки по разнице дат.
+    """
     return obj.close_date - obj.create_date

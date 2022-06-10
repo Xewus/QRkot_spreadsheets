@@ -1,3 +1,7 @@
+"""Эндпоинты для обработки обращений к `Google API`.
+"""
+from typing import Dict
+
 from aiogoogle import Aiogoogle
 from fastapi import APIRouter, Depends
 
@@ -7,7 +11,7 @@ from app.core.google_client import get_service
 from app.crud import charity_projects_crud as chr_crud
 from app.services import constants as const
 from app.services import google_api as go_service
-
+from app.services import utils
 
 router = APIRouter()
 
@@ -21,10 +25,29 @@ router = APIRouter()
 async def get_report(
     session: db.AsyncSession = Depends(db.get_async_session),
     wrapper_service: Aiogoogle = Depends(get_service),
-):
-    closed_projects = await chr_crud.get_projects_by_closing_speed(
-        session=session
+) -> Dict[str, str]:
+    """Отпраляет отчёт по скорости закрытия проектов в `googlesheets`.
+
+    ### Args:
+    - session (db.AsyncSession, optional):
+        Объект сессии с БД.
+        Defaults to Depends(db.get_async_session).
+    - wrapper_service (Aiogoogle, optional):
+        Ассихронный сервис работы с Google.
+        Defaults to Depends(get_service).
+
+    ### Returns:
+    - Dict:
+        Ссылка на таблицу с данными.
+    """
+    closed_projects = await chr_crud.get_by_field(
+            required_field='fully_invested',
+            value=True,
+            session=session,
+            one_obj=False
     )
+    closed_projects.sort(key=utils.sort_by_timdelta)
+
     spreadsheet_id = await go_service.get_exist_id(
         wrapper_service=wrapper_service
     )
@@ -43,5 +66,4 @@ async def get_report(
         projects=closed_projects,
         wrapper_service=wrapper_service
     )
-    print(closed_projects)
     return {'url': f'https://docs.google.com/spreadsheets/d/{spreadsheet_id}'}
