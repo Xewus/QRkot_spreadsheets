@@ -15,7 +15,7 @@ class CRUDCharityProject(CRUDBase):
     async def get_projects_by_closing_speed(
         self,
         session: db.AsyncSession
-    ) -> schemas.GoogleAPIResponseSchema:
+    ) -> schemas.GoogleAPIBaseSchema:
         charity_projects = await session.scalars(
             select(
                 models.CharityProject

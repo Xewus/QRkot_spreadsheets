@@ -35,10 +35,10 @@ class GenericFields:
             'invested_amount <= full_amount',
             name='invested_amount is more than full_amount'
         ),
-        sa.CheckConstraint(
-            'create_date <= close_date',
-            name='close_date is earlier than create_date'
-        )
+        # sa.CheckConstraint(
+        #     'create_date <= close_date',
+        #     name='close_date is earlier than create_date'
+        # )
     )
 
     full_amount = sa.Column(

@@ -2,11 +2,17 @@
 """
 from typing import Dict, List
 
-from pydantic import BaseModel, Extra, Field
+from pydantic import BaseModel, Extra, Field, HttpUrl
 
 
 class GoogleAPIBaseSchema(BaseModel):
-    reservations: List[Dict[str, str]] = Field(
+    """Базовый класс схем данных для работы с `Google API`.
+
+    ### Attrs:
+    - projects:
+        Список проектов.
+    """
+    ptojects: List[Dict[str, str]] = Field(
         ...,
         example=[
             {
@@ -21,5 +27,14 @@ class GoogleAPIBaseSchema(BaseModel):
         extra = Extra.forbid
 
 
-class GoogleAPIResponseSchema(GoogleAPIBaseSchema):
-    ...
+class GoogleAPIStringResponseSchema(BaseModel):
+    """Схема данных жля ответа на запрос.
+
+    ### Args:
+    - url(HttpUrl)
+        Строка с ссылкой на обработанный документ.
+    """
+    url: HttpUrl = Field(
+        ...,
+        example='https://docs.google.com/spreadsheets/d/spreadsheet_id'
+    )

@@ -20,7 +20,7 @@ class Settings(pd.BaseSettings):
     first_superuser_email: Union[None, pd.EmailStr] = None
     first_superuser_password: Union[None, str] =      None
     # for Google API
-    type_: Union[None, str] =                         None
+    type: Union[None, str] =                         None
     project_id: Union[None, str] =                    None
     private_key_id: Union[None, str] =                None
     private_key: Union[None, str] =                   None
@@ -30,7 +30,7 @@ class Settings(pd.BaseSettings):
     token_uri: Union[None, str] =                     None
     auth_provider_x509_cert_url: Union[None, str] =   None
     client_x509_cert_url: Union[None, str] =          None
-    email_user: Union[None, str] =                    None
+    email: Union[None, str] =                    None
 
     class Config:
         env_file = '.env'
