@@ -7,6 +7,7 @@ from aiogoogle import Aiogoogle
 from app.core.config import settings
 from app.services import constants as const
 from app.models import CharityProject
+from datetime import timedelta
 
 
 async def spreadsheet_create(wrapper_service: Aiogoogle) -> str:
@@ -127,10 +128,10 @@ async def spreadsheet_update_value(
         'Описание'
     ]]
     for project in projects:
-        delta = project.create_date - project.close_date
+        time_spent = str(abs(project.create_date - project.close_date))
         table_values.append([
             project.name,
-            delta.seconds,
+            time_spent,
             project.description
         ])
     update_body = {
