@@ -1,2 +1,0 @@
-[flake8]
-exclude = app/core/config.py, */__init__.py
