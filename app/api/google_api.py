@@ -11,7 +11,6 @@ from app.core.google_client import get_service
 from app.crud import charity_projects_crud as chr_crud
 from app.services import constants as const
 from app.services import google_api as go_service
-from app.services import utils
 
 router = APIRouter()
 
@@ -34,34 +33,21 @@ async def get_report(
         Объект сессии с БД.
         Defaults to Depends(db.get_async_session).
     - wrapper_service (Aiogoogle, optional):
-        Ассихронный сервис работы с Google.
+        Асихронный сервис работы с Google.
         Defaults to Depends(get_service).
 
     ### Returns:
     - Dict:
         Ссылка на таблицу с данными.
     """
-    closed_projects = await chr_crud.get_by_field(
-        required_field='fully_invested',
-        value=True,
-        session=session,
-        one_obj=False
+    closed_projects = await chr_crud.get_project_by_completion_rate(
+        session=session
     )
-    closed_projects.sort(key=utils.sort_by_timedelta)
 
-    spreadsheet_id = await go_service.get_exist_id(
+    spreadsheet_id = await go_service.get_spreadsheet_id(
         wrapper_service=wrapper_service
     )
 
-    if spreadsheet_id is None:
-        spreadsheet_id = await go_service.spreadsheet_create(
-            wrapper_service=wrapper_service
-        )
-
-    await go_service.set_user_permissions(
-        spreadsheet_id=spreadsheet_id,
-        wrapper_service=wrapper_service
-    )
     await go_service.spreadsheet_update_value(
         spreadsheet_id=spreadsheet_id,
         projects=closed_projects,

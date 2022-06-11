@@ -1,6 +1,6 @@
 """Функции взаимодействия приложения с Google API.
 """
-from typing import List, Union
+from typing import List
 
 from aiogoogle import Aiogoogle
 
@@ -74,8 +74,8 @@ async def set_user_permissions(
     )
 
 
-async def get_exist_id(wrapper_service: Aiogoogle) -> Union[None, str]:
-    """Получает `id` таблицы, если таковая существует.
+async def get_spreadsheet_id(wrapper_service: Aiogoogle) -> str:
+    """Получает `id` таблицы. Если таковой не существует - создаёт новую.
 
     ### Args:
     - wrapper_service (Aiogoogle):
@@ -94,12 +94,21 @@ async def get_exist_id(wrapper_service: Aiogoogle) -> Union[None, str]:
             q='mimeType="application/vnd.google-apps.spreadsheet"'
         )
     )
+
+    spreadsheet_id = None
     table = response['files']
+
     if len(table) > 0:
-        for sheet in table:
-            if sheet['name'] == const.TABLE_NAME:
-                return sheet['id']
-    return None
+        for spreadsheet in table:
+            if spreadsheet['name'] == const.TABLE_NAME:
+                spreadsheet_id = spreadsheet['id']
+                break
+
+    if spreadsheet_id is None:
+        spreadsheet_id = spreadsheet_create(
+            wrapper_service=wrapper_service
+        )
+    return spreadsheet_id
 
 
 async def spreadsheet_update_value(
@@ -120,6 +129,10 @@ async def spreadsheet_update_value(
     service = await wrapper_service.discover(
         api_name='sheets',
         api_version='v4'
+    )
+    await set_user_permissions(
+        spreadsheet_id=spreadsheet_id,
+        wrapper_service=wrapper_service
     )
     table_values = [[
         'Название проекта',

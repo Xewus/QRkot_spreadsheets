@@ -5,5 +5,5 @@ from .charity_project import (BaseModel, CharityProjectCreate,  # noqa
 from .donation import (DonationCreate, DonationLongResponse,  # noqa
                        DonationShortResponse)
 from .google_api import GoogleAPIBaseSchema  # noqa
-from .google_api import GoogleAPIStringResponseSchema   # noqa
+from .google_api import GoogleAPIStringResponseSchema  # noqa
 from .user import User, UserCreate, UserDB, UserUpdate  # noqa
