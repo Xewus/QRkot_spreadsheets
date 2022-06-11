@@ -79,11 +79,11 @@ async def get_spreadsheet_id(wrapper_service: Aiogoogle) -> str:
 
     ### Args:
     - wrapper_service (Aiogoogle):
-        _description_
+        ...
 
     ### Returns:
     - str:
-        _description_
+        `id` таблицы.
     """
     service = await wrapper_service.discover(
         api_name='drive',

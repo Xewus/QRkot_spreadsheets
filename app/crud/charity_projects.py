@@ -24,13 +24,13 @@ class CRUDCharityProject(CRUDBase):
         - session (AsyncSession):
             Объект сессии с БД.
         - reverse (bool):
-            Направлени сортированного списка.
+            Направлениt сортированного списка.
             По умолчанию начинается с наименьшего.
             Default to False
 
         ### Returns:
         - List[ChatityProject]:
-            Осортированный список проектов.
+            Оnсортированный список проектов.
         """
         closed_projects = await self.get_by_field(
             required_field='fully_invested',

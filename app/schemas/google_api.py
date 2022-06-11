@@ -28,7 +28,7 @@ class GoogleAPIBaseSchema(BaseModel):
 
 
 class GoogleAPIStringResponseSchema(BaseModel):
-    """Схема данных жля ответа на запрос.
+    """Схема данных для ответа на запрос.
 
     ### Args:
     - url(HttpUrl)
