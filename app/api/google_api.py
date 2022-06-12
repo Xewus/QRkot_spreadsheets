@@ -28,6 +28,8 @@ async def get_report(
     """Отпраляет отчёт по скорости закрытия проектов в `googlesheets`.
 
     Только для суперюзеров.
+    Возвращает URL-адрес изменённой таблицы.
+
     ### Args:
     - session (db.AsyncSession, optional):
         Объект сессии с БД.

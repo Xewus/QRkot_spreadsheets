@@ -30,7 +30,7 @@ class CRUDCharityProject(CRUDBase):
 
         ### Returns:
         - List[ChatityProject]:
-            Оnсортированный список проектов.
+            Отсортированный список проектов.
         """
         query = select(
             CharityProject.name,
