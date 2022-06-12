@@ -2,11 +2,11 @@
 """
 from typing import List, Union
 
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import asc, desc, select
 
-from app import models
+from app.core import db
 from app.crud.base import CRUDBase
-from app.services import utils
+from app.models import CharityProject
 
 
 class CRUDCharityProject(CRUDBase):
@@ -14,7 +14,7 @@ class CRUDCharityProject(CRUDBase):
     """
     async def get_project_by_completion_rate(
         self,
-        session: AsyncSession,
+        session: db.AsyncSession,
         reverse: bool = False
     ) -> Union[None, List]:
         """Получает список закрытых проектов сортированый по
@@ -32,17 +32,22 @@ class CRUDCharityProject(CRUDBase):
         - List[ChatityProject]:
             Оnсортированный список проектов.
         """
-        closed_projects = await self.get_by_field(
-            required_field='fully_invested',
-            value=True,
-            session=session,
-            one_obj=False
+        query = select(
+            CharityProject.name,
+            CharityProject.description,
+            (
+                db.datetime_func(CharityProject.close_date) -
+                db.datetime_func(CharityProject.create_date)
+            ).label('lifetime')
         )
-        closed_projects.sort(
-            key=utils.sort_by_timedelta,
-            reverse=reverse
-        )
-        return closed_projects
+        query = (
+            query.order_by(asc('lifetime')),
+            query.order_by(desc('lifetime'))
+        )[reverse]
+
+        closed_projects = await session.execute(query)
+
+        return closed_projects.all()
 
 
-charity_projects_crud = CRUDCharityProject(models.CharityProject)
+charity_projects_crud = CRUDCharityProject(CharityProject)

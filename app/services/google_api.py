@@ -1,5 +1,6 @@
 """Функции взаимодействия приложения с Google API.
 """
+from datetime import timedelta
 from typing import List
 
 from aiogoogle import Aiogoogle
@@ -140,10 +141,9 @@ async def spreadsheet_update_value(
         'Описание'
     ]]
     for project in projects:
-        time_spent = str(abs(project.create_date - project.close_date))
         table_values.append([
             project.name,
-            time_spent,
+            str(timedelta(project.lifetime)),
             project.description
         ])
     update_body = {

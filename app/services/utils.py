@@ -114,9 +114,3 @@ def normalize_datetime(values: dict) -> dict:
                 timespec=const.TIMESPEC
             )
     return values
-
-
-def sort_by_timedelta(obj):
-    """Ключ для сортировки по разнице дат.
-    """
-    return obj.close_date - obj.create_date
