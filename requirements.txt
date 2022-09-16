@@ -38,7 +38,7 @@ httptools==0.4.0
 idna==3.3
 iniconfig==1.1.1
 makefun==1.13.1
-mako==1.2.0
+mako==1.2.2
 markupsafe==2.1.1
 mccabe==0.6.1
 mixer==7.2.2
