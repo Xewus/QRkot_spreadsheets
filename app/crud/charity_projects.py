@@ -24,7 +24,7 @@ class CRUDCharityProject(CRUDBase):
         - session (AsyncSession):
             Объект сессии с БД.
         - reverse (bool):
-            Направлениt сортированного списка.
+            Направление сортированного списка.
             По умолчанию начинается с наименьшего.
             Default to False
 
