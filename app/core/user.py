@@ -29,7 +29,7 @@ async def get_user_db(
 
 
 def get_jwt_strategy() -> auth.JWTStrategy:
-    """Получает настрайки для использования `JWT`.
+    """Получает настройки для использования `JWT`.
 
     ### Returns:
     - auth.JWTStrategy:
